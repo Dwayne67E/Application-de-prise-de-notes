@@ -24,17 +24,17 @@ class AddEditNoteFragment:Fragment(R.layout.fragment_edit_code) {
 
         val viewModel by viewModels<NoteViewModel> ()
         val binding = FragmentEditCodeBinding.bind(requireView())
-        val args: FragmentEditCodeArgs by navArgs()
+        val args: AddEditNoteFragmentArgs by navArgs()
         val note = args.note
 
         if(note != null) {
             binding.apply {
-                titreEdit.setText(note.title)
-                contenuEdit.setText(note.content)
+                titreEdit.setText(note.titre)
+                contenuEdit.setText(note.contenu)
                 saveBtn.setOnClickListener {
                     val title = titreEdit.text.toString()
                     val content = contenuEdit.text.toString()
-                    val updatedNote = note.copy(title = title, content = content, date = System.currentTimeMillis())
+                    val updatedNote = note.copy(titre = title, contenu = content, date = System.currentTimeMillis())
                     viewModel.updateNote(updatedNote)
                 }
             }
@@ -51,8 +51,8 @@ class AddEditNoteFragment:Fragment(R.layout.fragment_edit_code) {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.notesEvent.collect { event ->
                     if(event is NoteViewModel.NotesEvent.NavigateToNotesFragment) {
-                        val action = FragmentEditCodeDirections.actionAddEditNoteFragmentToNoteFragment()
-                        findNavController().navigate(action.toInt)
+                        val action = AddEditNoteFragmentDirections.actionAddEditNoteFragmentToNoteFragment()
+                        findNavController().navigate(action)
                     }
                 }
             }

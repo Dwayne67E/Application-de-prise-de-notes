@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id ("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
 }
 
@@ -39,32 +41,31 @@ android {
         viewBinding = true
     }
 }
-dependencies {
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-    // Composant de base de données Room
-    val room_version = "2.6.1"
-    implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.room.compiler)
-    implementation(libs.androidx.core.ktx)
-// To use Kotlin annotation processing tool (kapt)
-    kapt(libs.androidx.room.room.compiler)
-    implementation(libs.androidx.room.ktx)
-// Composants de cycle de vie
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-// LiveData
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    kapt(libs.androidx.lifecycle.compiler)
-    implementation (libs.androidx.fragment.ktx)
 
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
+dependencies {
+    implementation(libs.material.v1110beta01)
+    implementation(libs.kotlin.stdlib.v1922)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat.v131)
+    implementation(libs.material.v140)
     implementation(libs.androidx.constraintlayout)
+
+    // Navigation components
+    implementation(libs.androidx.navigation.fragment.ktx.v273)
+    implementation(libs.androidx.navigation.ui.ktx.v273)
+
+    // Hilt for dependency injection
+    implementation(libs.hilt.android.v2381)
+    kapt(libs.hilt.android.compiler)
+
+    // Test dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation (libs.kotlin.stdlib)
-    implementation(libs.hilt.android)
+    // Commented out the xmlpull library to avoid duplicates.
+    // If you need it for some specific reason, uncomment the below line and ensure you are excluding any duplicates
+    // implementation("xmlpull:xmlpull:1.1.3.1")
 }
+
+// Remove the implementation line for navigation.safe.args if it's causing issues.
