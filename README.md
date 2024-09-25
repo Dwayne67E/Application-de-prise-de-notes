@@ -12,4 +12,6 @@
 ### Pour importer le projet.
 #### 1 - git clone https://github.com/Dwayne67E/Notes_Elias/tree/main
 #### 2 - ouvrir dans Android Studio
-
+### Groupe
+#### ENKIRCHE Elias
+#### ROUSSELEAU Kyllian
