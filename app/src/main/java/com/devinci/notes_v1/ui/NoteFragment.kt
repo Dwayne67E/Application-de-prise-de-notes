@@ -27,8 +27,8 @@ class NoteFragment : Fragment(R.layout.fragment_notes ) {
             recyclerViewNotes.setHasFixedSize(true)
 
             addBtn.setOnClickListener {
-                val action = NoteFragmentDirections.actionNoteFragmentToAddEditNoteFragment(null)
-                findNavController().navigate(action)
+                val action = fragmentNotesDirections.actionNoteFragmentToAddEditNoteFragment(null)
+                findNavController().navigate(action.toInt)
             }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.notes.collect{notes ->
@@ -47,8 +47,8 @@ class NoteFragment : Fragment(R.layout.fragment_notes ) {
         }
     }
     fun onNoteClick(note: Note) {
-        val action = NoteFragmentDirections.actionNoteFragmentToAddEditNoteFragment(note)
-        findNavController().navigate(action)
+        val action = fragment_notesDirections.actionNoteFragmentToAddEditNoteFragment(note)
+        findNavController().navigate(action.toInt)
     }
     fun onNoteLongClick(note: Note) {
         viewModel.deleteNote(note)

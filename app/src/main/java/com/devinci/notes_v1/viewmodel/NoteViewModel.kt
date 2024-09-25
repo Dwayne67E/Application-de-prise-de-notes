@@ -26,12 +26,12 @@ class NoteViewModel @Inject constructor(private val noteDao: NoteDao): ViewModel
         notesChannel.send(NotesEvent.NavigateToNotesFragment)
     }
 
-    fun update(note: Note) = viewModelScope.launch {
+    fun updateNote(note: Note) = viewModelScope.launch {
         noteDao.updateNote(note)
         notesChannel.send(NotesEvent.NavigateToNotesFragment)
     }
 
-    fun delete(note: Note) = viewModelScope.launch {
+    fun deleteNote(note: Note) = viewModelScope.launch {
         noteDao.deleteNote(note)
         notesChannel.send(NotesEvent.ShowUndoSnackBar("Note deleted successfully", note))
     }
